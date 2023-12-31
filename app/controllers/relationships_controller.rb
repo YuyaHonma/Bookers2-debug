@@ -1,4 +1,5 @@
 class RelationshipsController < ApplicationController
+  before_action :authenticate_user!
     # フォロー追加機能
   def create
     user = User.find(params[:user_id])
@@ -19,6 +20,6 @@ class RelationshipsController < ApplicationController
   # フォロー一覧表示
   def following
     user = User.find(params[:user_id])
-    @users = user.following
+    @users = user.followings
   end
 end
