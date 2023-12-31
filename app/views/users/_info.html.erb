@@ -1,4 +1,5 @@
 <table class='table'>
+  <tbody>
   <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
   <tr>
 	  <th>name</th>
@@ -8,10 +9,24 @@
 	  <th>introduction</th>
 	  <th><%= user.introduction %></th>
   </tr>
+  <tr>
+      <th>follows</th>
+      <th><%= link_to user.following.count, user_following_path(user) %></th>
+    </tr>
+    <tr>
+      <th>followers</th>
+      <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+    </tr>
+    <!--# ここまで-->
+  </tbody>
 </table>
 　
 <div class='row'>
+  <% if current_user == user %>
   <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
     <i class="fas fa-user-cog"></i>
+  <% end %>
+  <% else %>
+    <%= render 'relationships/button', user: user %>
   <% end %>
 </div>
