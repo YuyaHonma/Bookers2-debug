@@ -1,0 +1,2 @@
+<!-- お気に入り登録が成功したときの処理 -->
+$("#favorite_btn_<%= @book.id %>").html("<%= j(render 'favorites/favorite_btn', book: @book) %>");
