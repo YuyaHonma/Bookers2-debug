@@ -1,6 +1,6 @@
-class RoomsController < ApplicationController
-      before_action :authenticate_user!
-      before_action :reject_non_related, only: [:show]
+  class RoomsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :reject_non_related, only: [:show]
 
   def create
     @room = Room.create
@@ -29,5 +29,4 @@ class RoomsController < ApplicationController
         redirect_to books_path
       end
     end
-    
-end
+  end
