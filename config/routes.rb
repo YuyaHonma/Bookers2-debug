@@ -13,6 +13,8 @@ end
   get "followers" => "relationships#followers", as: "followers"
   get "following" => "relationships#following", as: "following"
 end
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create, :show]
   get "search", to: "searches#search"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
