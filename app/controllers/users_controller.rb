@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @currentUserEntry = Entry.where(user_id: current_user.id)
     @userEntry = Entry.where(user_id: @user.id)
     @isRoom = false
-@roomId = nil
+    @roomId = nil
 
 unless @user.id == current_user.id
   @currentUserEntry.each do |cu| 
@@ -26,6 +26,7 @@ else
   @room = Room.new
   @entry = Entry.new
 end
+
   end
 
   def index

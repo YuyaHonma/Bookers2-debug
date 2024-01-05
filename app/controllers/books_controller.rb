@@ -5,6 +5,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @new_book = Book.new
     @book_comment = BookComment.new
+    @book_detail = Book.find(params[:id])
+
+    # 閲覧数をインクリメントする処理
+    if current_user && !ViewCount.exists?(user_id: current_user.id, book_id: @book_detail.id)
+      current_user.view_counts.create(book: @book_detail)
+    end
   end
 
   def index
