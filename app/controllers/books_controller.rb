@@ -77,7 +77,7 @@ end
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :image, :star)
+    params.require(:book).permit(:title, :body, :image, :star, :category)
   end
   
 end

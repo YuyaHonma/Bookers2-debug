@@ -7,7 +7,7 @@
     <%= f.label :body, "Opinion" %><br>
     <%= f.text_area :body, class: "form-control" %>
   </div>
-  
+
     <!--# starについての記述-->
   <% if book.id.nil? %>
     <div class="form-group" id="star">
@@ -35,7 +35,10 @@
       <%= render "static_rate", book: book %>
     </div>
   <% end %>
-  
+  <div class="form-group">
+  <label>Category</label>
+  <%= f.text_field :category,class: 'form-control book_category' %>
+</div>
   <div class="form-group">
     <%= f.submit book.persisted? ? 'Update Book' : 'Create Book', class: "btn btn-success", data: { disable_with: (book.persisted? ? 'Updating...' : 'Creating...') } %>
   </div>
