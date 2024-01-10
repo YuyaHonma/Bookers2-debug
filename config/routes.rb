@@ -20,4 +20,5 @@ end
   get 'tagsearches/search', to: 'tagsearches#search'
   resources :messages, only: [:create]
   resources :rooms, only: [:create, :show]
+  resources :groups, only: [:new, :index, :show, :create, :edit, :update]
 end
