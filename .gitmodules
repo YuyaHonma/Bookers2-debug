@@ -1,0 +1,3 @@
+[submodule "raty"]
+	path = raty
+	url = git@github.com:wbotelhos/raty.git

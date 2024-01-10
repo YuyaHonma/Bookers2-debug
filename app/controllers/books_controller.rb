@@ -54,14 +54,21 @@ end
   end
 
   def destroy
-    @book = Book.find(params[:id])
+  @book = Book.find(params[:id])
+  if current_user == @book.user
     @book.destroy
-    redirect_to books_path, notice: "You have deleted book successfully."
+    redirect_to books_path, notice: "You have deleted the book successfully."
+  else
+    redirect_to books_path, alert: "You are not authorized to delete this book."
   end
+end
+
 
   private
 
   def book_params
-    params.require(:book).permit(:title, :body)
+    params.require(:book).permit(:title, :body, :image, :star)
   end
+  
 end
+
