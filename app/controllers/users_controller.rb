@@ -28,9 +28,10 @@ class UsersController < ApplicationController
     @room = Room.new
     @entry = Entry.new(room: @room, user: current_user)
   end
+
+  # 追加: Entry.new を実行するときに user_id を設定
+  @entry.user_id = current_user.id if @entry.present?
 end
-
-
 
   def index
     @users = User.all

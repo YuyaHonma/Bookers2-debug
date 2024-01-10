@@ -1,25 +1,31 @@
 <table class='table'>
   <tbody>
-  <tr><%= image_tag user.get_profile_image, size:'100x100' %></tr>
-  <tr>
-	  <th>name</th>
-	  <th><%= user.name %></th>
-  </tr>
-  <tr>
-	  <th>introduction</th>
-	  <th><%= user.introduction %></th>
-  </tr>
-  <tr>
+    <tr>
+      <% if @user.present? %>
+        <%= image_tag @user.get_profile_image, size: '100x100' %>
+        <th>name</th>
+        <th><%= @user.name %></th>
+      <% else %>
+        <th>name</th>
+        <th>User not found</th>
+      <% end %>
+    </tr>
+    <tr>
+      <th>introduction</th>
+      <th><%= @user&.introduction %></th>
+    </tr>
+    <tr>
       <th>follows</th>
-      <th><%= link_to user.following.count, user_following_path(user) %></th>
+      <th><%= link_to @user.following.count, user_following_path(@user) if @user.present? %></th>
     </tr>
     <tr>
       <th>followers</th>
-      <th><%= link_to user.followers.count, user_followers_path(user) %></th>
+      <th><%= link_to @user.followers.count, user_followers_path(@user) if @user.present? %></th>
     </tr>
-    <!--# ここまで-->
+    <!-- ここまで -->
   </tbody>
 </table>
+
 　
 <div class='row'>
   <!-- users/show.html.erb -->
@@ -35,13 +41,14 @@
   <% if (current_user.following?(@user)) && (@user.following?(current_user)) %>
     <% if @isRoom == true %>
       <%= link_to "チャットへ", room_path(@roomId), class: "btn btn-primary" %>
-    <% else %>
-      <%= form_for @room do |f| %>
-        <%= fields_for @entry do |e| %>
-          <%= e.hidden_field :user_id, value: @user.id %>
-        <% end %>
-        <%= f.submit "chatを始める", class: "btn btn-primary user-show-chat" %>
-      <% end %>
+<% else %>
+  <%= form_for @room do |f| %>
+    <%= fields_for @entry do |e| %>
+      <%= e.hidden_field :user_id, value: @user.id %>
+    <% end %>
+    <%= f.submit "chatを始める", class: "btn btn-primary user-show-chat" %>
+  <% end %>
+
     <% end %>
   <% end %>
 <% end %>

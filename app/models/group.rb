@@ -1,7 +1,11 @@
 class Group < ApplicationRecord
   has_many :group_users, dependent: :destroy
   belongs_to :owner, class_name: 'User'
-  has_many :users, through: :group_users
+  has_many :users, through: :group_users, source: :user
+
+  def includes_user?(user)
+    group_users.exists?(user_id: user.id)
+  end
 
   validates :name, presence: true
   validates :introduction, presence: true
